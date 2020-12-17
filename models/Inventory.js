@@ -2,7 +2,7 @@
  * @author [Similoluwa Okunowo (The Caveman)]
  * @email [rexsimiloluwa@gmail.com]
  * @create date 2020-12-17 03:38:21
- * @modify date 2020-12-17 11:30:59
+ * @modify date 2020-12-17 11:45:12
  * @desc [description]
  */
 
@@ -44,6 +44,12 @@
      weight : {
          type : Number,
          required : true
+     },
+
+     onsite : {
+         type : Boolean,
+         required : true,
+         default: true
      }
 
  })
