@@ -1,0 +1,32 @@
+{
+  "name": "apidoc-express-swagger",
+  "version": "1.0.0",
+  "description": "Learning how to properly document world-class Node.js and Express RestFul APIs using Swagger and OpenAPI.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rexsimiloluwah/apidoc-express-swagger.git"
+  },
+  "keywords": [
+    "API",
+    "Documentation",
+    "Node.js",
+    "Express",
+    "Swagger"
+  ],
+  "author": "TheBlackDove",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rexsimiloluwah/apidoc-express-swagger/issues"
+  },
+  "homepage": "https://github.com/rexsimiloluwah/apidoc-express-swagger#readme",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.11.8",
+    "swagger-ui-express": "^4.1.5"
+  }
+}
