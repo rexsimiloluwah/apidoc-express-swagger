@@ -2,7 +2,7 @@
  * @author [Similoluwa Okunowo (The Caveman)]
  * @email [rexsimiloluwa@gmail.com]
  * @create date 2020-12-17 03:38:38
- * @modify date 2020-12-17 13:52:32
+ * @modify date 2020-12-17 14:04:54
  * @desc [description]
  */
 
@@ -84,7 +84,7 @@ const getInventoryById = async (req, res, next) => {
 
         })
         .catch(err => {
-            console.error(err);
+            // console.error(err);
             return next(new HttpError(`Could not find inventory for id - ${inventoryId}`, 404));
         })
 }
@@ -117,7 +117,35 @@ const updateInventoryById = async (req, res, next) => {
                     })
         })
         .catch(err => {
-            console.error(err);
+            // console.error(err);
+            return next(new HttpError(err, 500));
+        })
+}
+
+// @desc - Controller for Deleting Inventory by id
+const deleteInventoryById = async (req, res, next) => {
+
+    const inventoryId = req.params.id;
+
+    let inventory;
+    try{
+        inventory = await Inventory.findById(inventoryId);
+    }
+    catch(err){
+        console.error(err);
+        return next(new HttpError(`Could not find inventory for id - ${inventoryId}`))
+    }
+
+    inventory.remove()
+        .then(response => {
+            console.log(response);
+            return res.status(200)
+                    .json({
+                        "message" : `Successfully deleted inventory with id - ${inventoryId}`
+                    })
+        })
+        .catch(err => {
+            // console.error(err);
             return next(new HttpError(err, 500));
         })
 }
@@ -126,3 +154,4 @@ module.exports.addInventory = addInventory;
 module.exports.getAllInventories = getAllInventories;
 module.exports.getInventoryById = getInventoryById;
 module.exports.updateInventoryById = updateInventoryById;
+module.exports.deleteInventoryById = deleteInventoryById;
