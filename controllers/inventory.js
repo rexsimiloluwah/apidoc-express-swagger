@@ -2,7 +2,7 @@
  * @author [Similoluwa Okunowo (The Caveman)]
  * @email [rexsimiloluwa@gmail.com]
  * @create date 2020-12-17 03:38:38
- * @modify date 2020-12-17 13:11:31
+ * @modify date 2020-12-17 13:52:32
  * @desc [description]
  */
 
@@ -43,6 +43,10 @@ const addInventory = async (req, res, next) => {
                     data : response
                 })
         })
+        .catch(err => {
+            console.error(err);
+            next(new HttpError(err, 500));
+        })
 }
 
 // @desc - Controller for Fetching/Reading all inventories
@@ -56,8 +60,69 @@ const getAllInventories = async (req, res, next) => {
                     data : response
                 })
     })
+    .catch(err => {
+        console.error(err);
+        next(new HttpError(err, 500));
+    })
 
+}
+
+// @desc - Controller for Fetching Inventory by id 
+const getInventoryById = async (req, res, next) => {
+    const inventoryId = req.params.id;
+
+    Inventory.findById(inventoryId)
+        .then(response => {
+            console.log(response);
+            if(response){
+                return res.status(200)
+                        .json({
+                            "message" : `Successfully fetched inventory for id - ${inventoryId}`,
+                            "inventory" : response
+                        })
+            }
+
+        })
+        .catch(err => {
+            console.error(err);
+            return next(new HttpError(`Could not find inventory for id - ${inventoryId}`, 404));
+        })
+}
+
+// @desc - Controller for Updating Inventory by id
+const updateInventoryById = async (req, res, next) => {
+
+    const inventoryId = req.params.id;
+
+    let inventory;
+    try{
+        inventory = await Inventory.findById(inventoryId);
+    }
+    catch(err){
+        console.error(err);
+        return next(new HttpError(`Could not find inventory for id - ${inventoryId}`))
+    }
+
+    for (const property in req.body){
+        inventory[property] = req.body[property]
+    }
+
+    inventory.save()
+        .then(response => {
+            console.log(response);
+            return res.status(200)
+                    .json({
+                        "message" : `Successfully updated inventory with id - ${inventoryId}`,
+                        "data" : response
+                    })
+        })
+        .catch(err => {
+            console.error(err);
+            return next(new HttpError(err, 500));
+        })
 }
 
 module.exports.addInventory = addInventory;
 module.exports.getAllInventories = getAllInventories;
+module.exports.getInventoryById = getInventoryById;
+module.exports.updateInventoryById = updateInventoryById;
