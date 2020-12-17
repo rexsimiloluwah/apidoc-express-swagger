@@ -2,7 +2,7 @@
  * @author [Similoluwa Okunowo (The Caveman)]
  * @email [rexsimiloluwa@gmail.com]
  * @create date 2020-12-17 12:04:58
- * @modify date 2020-12-17 12:19:18
+ * @modify date 2020-12-17 12:35:37
  * @desc [description]
  */
 
@@ -15,3 +15,5 @@
  // @route POST / 
 
  router.post("/", addInventory);
+
+ module.exports = router;

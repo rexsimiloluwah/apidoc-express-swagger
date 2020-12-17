@@ -2,7 +2,7 @@
  * @author [Similoluwa Okunowo (The Caveman)]
  * @email [rexsimiloluwa@gmail.com]
  * @create date 2020-12-17 03:38:21
- * @modify date 2020-12-17 11:45:12
+ * @modify date 2020-12-17 12:51:44
  * @desc [description]
  */
 
@@ -50,8 +50,13 @@
          type : Boolean,
          required : true,
          default: true
+     },
+
+     created_at : {
+         type : Date,
+         default : Date.now
      }
 
  })
 
- module.exports = mongoose.model('inventory', InventorySchema);
+ module.exports = mongoose.model('Inventory', InventorySchema);

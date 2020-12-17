@@ -2,7 +2,7 @@
  * @author [Similoluwa Okunowo (The Caveman)]
  * @email [rexsimiloluwa@gmail.com]
  * @create date 2020-12-17 03:38:38
- * @modify date 2020-12-17 12:00:53
+ * @modify date 2020-12-17 12:53:19
  * @desc [description]
  */
 
@@ -33,12 +33,12 @@ const addInventory = async (req, res, next) => {
     })
 
     newInventory.save()
-        .then( res => {
-            console.log(res);
+        .then( response => {
+            console.log(response);
             return res.status(201)
                 .json({
                     message : `${req.body.name} successfully added to inventory !`,
-                    data : res.data
+                    data : response
                 })
         })
 }

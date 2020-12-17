@@ -25,7 +25,7 @@ const inventoryValidation = data => {
         weight : Joi.number()
                     .required(),
 
-        onsite : Join.boolean()
+        onsite : Joi.boolean()
                     .required(),           
 
     })

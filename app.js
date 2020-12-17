@@ -2,7 +2,7 @@
  * @author [Similoluwa Okunowo (The Caveman)]
  * @email [rexsimiloluwa@gmail.com]
  * @create date 2020-12-17 03:24:49
- * @modify date 2020-12-17 11:16:51
+ * @modify date 2020-12-17 12:40:06
  * @desc [description]
  */
 
@@ -14,6 +14,9 @@ const HttpError = require("./HttpError");
 // Connect to database
 const connectToMongo = require("./config/connectToMongo");
 require("dotenv").config();
+
+// Routes 
+const inventory = require("./routes/inventory");
 
 // Instantiate the app
 const app = express()
@@ -40,6 +43,9 @@ app.use( (req, res, next) => {
     next()
 })
 
+// Route middlewares 
+app.use('/api/v1/inventory', inventory);
+
 // Handling Errors for unspecified routes 
 app.use( (req, res, next) => {
     const error = new HttpError("Could not find specified route.", 500);
@@ -53,7 +59,7 @@ app.use( (error, req, res, next) => {
 
     res.status(error.code || 500)
     .json({
-        "message" : "An unknown error occurred"
+        "message" : error.message || "An unknown error occurred"
     })
 })
 
