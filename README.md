@@ -2,6 +2,9 @@
 
 Learning how to properly document world-class Node.js and Express RestFul APIs using Swagger and OpenAPI.
 
+## Description
+Building a simple Inventory CRUD RestFul API and documenting the API resources using Swagger and OpenAPI for learning and didactic purposes.
+
 ### Languages used
 - Javascript (with Node.js runtime)
 
@@ -10,6 +13,7 @@ Learning how to properly document world-class Node.js and Express RestFul APIs u
 
 ### Tools and Libraries used 
 - Swagger
+- Mongo Atlas (Database)
 
 ### Configuration
 ...
