@@ -2,7 +2,7 @@
  * @author [Similoluwa Okunowo (The Caveman)]
  * @email [rexsimiloluwa@gmail.com]
  * @create date 2020-12-17 03:24:49
- * @modify date 2020-12-17 03:36:02
+ * @modify date 2020-12-17 11:16:51
  * @desc [description]
  */
 
@@ -11,10 +11,14 @@ const path = require("path");
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const HttpError = require("./HttpError");
+// Connect to database
+const connectToMongo = require("./config/connectToMongo");
 require("dotenv").config();
 
 // Instantiate the app
 const app = express()
+
+connectToMongo();
 
 // Middlewares 
 app.use(bodyParser.json());
