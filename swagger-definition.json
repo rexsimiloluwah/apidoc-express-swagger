@@ -1,0 +1,274 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "0.1",
+    "title": "Medical Inventory CRUD RESTFul API",
+    "description": "Getting started with World-class API documentation and design.",
+    "contact": {
+      "email": "apiteam@swagger.io"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "host": "localhost:3000",
+  "basePath": "/api/v1/inventory",
+  "tags": [
+    {
+      "name": "Medical Inventory",
+      "description": "Everything about CRUD with a medical inventory API",
+      "externalDocs": {
+        "description": "Find out more",
+        "url": "http://swagger.io"
+      }
+    }
+  ],
+  "schemes": [
+    "https",
+    "http"
+  ],
+  "paths": {
+    "/": {
+      "post": {
+        "tags": [
+          "Add a New Inventory"
+        ],
+        "summary": "Add a new Inventory",
+        "description": "Endpoint for adding a new inventory to the database",
+        "operationId": "addNewInventory",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Inventory needs to be added",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Inventory"
+            }
+          }
+        ],
+        "responses": {
+          "405": {
+            "description": "Please enter a valid inventory"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Get all Inventories"
+        ],
+        "summary": "Add a new Inventory",
+        "description": "Endpoint for fetching all inventories",
+        "operationId": "getAllInventories",
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "responses": {
+          "200": {
+            "description": "All Inventories",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Inventory"
+              }
+            }
+          },
+          "400": {
+            "description": "Could not fetch inventories"
+          }
+        }
+      }
+    },
+    "/{inventoryId}": {
+      "get": {
+        "tags": [
+          "Get Inventory by Id"
+        ],
+        "summary": "Get an Inventory by Id",
+        "description": "Endpoint for fetching inventory by the inventory Id",
+        "operationId": "getInventoryById",
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "inventoryId",
+            "in": "path",
+            "description": "Inventory ID",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully fetched the inventory",
+            "schema": {
+              "$ref": "#/definitions/Inventory"
+            }
+          },
+          "400": {
+            "description": "Invalid ID passed"
+          },
+          "404": {
+            "description": "Inventory not found for this ID"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Update an existing Inventory"
+        ],
+        "summary": "Update an Inventory by Id",
+        "description": "Endpoint for Updating inventory by the inventory Id",
+        "operationId": "updateInventoryById",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "inventoryId",
+            "in": "path",
+            "description": "ID of inventory that needs to be updated",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Update the fields",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/Inventory"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the inventory",
+            "schema": {
+              "$ref": "#/definitions/Inventory"
+            }
+          },
+          "400": {
+            "description": "Invalid ID passed"
+          },
+          "404": {
+            "description": "Inventory not found for this ID"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Delete an existing inventory"
+        ],
+        "summary": "Delete an existing inventory by ID",
+        "description": "Endpoint for deleting an existing inventory by Id",
+        "operationId": "deleteInventoryById",
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "inventoryId",
+            "in": "path",
+            "description": "ID of the inventory that needs to be deleted",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the inventory"
+          },
+          "400": {
+            "description": "Invalid ID passed"
+          },
+          "404": {
+            "description": "Inventory not found  for this ID"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Inventory": {
+      "type": "object",
+      "required": [
+        "name",
+        "description",
+        "quantity",
+        "selling_price",
+        "status",
+        "weight",
+        "onsite"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "selling_price": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "In Stock",
+            "Delivered",
+            "Unavailable"
+          ]
+        },
+        "weight": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "onsite": {
+          "type": "boolean"
+        }
+      }
+    },
+    "xml": {
+      "name": "Inventory"
+    },
+    "Error": {
+      "type": "object",
+      "required": [
+        "code",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
