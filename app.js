@@ -2,7 +2,7 @@
  * @author [Similoluwa Okunowo (The Caveman)]
  * @email [rexsimiloluwa@gmail.com]
  * @create date 2020-12-17 03:24:49
- * @modify date 2020-12-17 12:40:06
+ * @modify date 2020-12-17 14:49:18
  * @desc [description]
  */
 
@@ -11,6 +11,11 @@ const path = require("path");
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const HttpError = require("./HttpError");
+const swaggerUI = require("swagger-ui-express");
+// This will help to convert YAML to JSON compliant form
+const YAML = require("yamljs");
+const swaggerDefinition = YAML.load("./swagger-definition.yaml");
+
 // Connect to database
 const connectToMongo = require("./config/connectToMongo");
 require("dotenv").config();
@@ -42,6 +47,9 @@ app.use( (req, res, next) => {
 
     next()
 })
+
+// Swagger UI Docs middleware 
+app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDefinition));
 
 // Route middlewares 
 app.use('/api/v1/inventory', inventory);

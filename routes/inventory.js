@@ -32,5 +32,4 @@
 // @route DELETE /id
 router.delete("/:id", deleteInventoryById);
 
-
  module.exports = router;
